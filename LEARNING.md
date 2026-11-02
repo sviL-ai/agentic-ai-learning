@@ -27,3 +27,12 @@
     b. Routing first identifies what type of request has been received and sends it to the most suitable prompt, model, or tool.
     c. Parallelization divides a task into independent parts and processes them simultaneously, or runs the same task multiple times to compare results and improve reliability.
     d. Orchestrator-workers uses a central LLM to understand a complex task, decide what smaller tasks are needed, assign them to different worker LLMs, and combine their results into one final answer.
+
+### Date: 02/11/2026
+
+1. State: It is a collection or record of the conversation, API calls, intermediate results throughout the execution of a task in a conversation. It consists of user's original goal, the current progress of the task execution, tool invoking and the output from them, intermediate analysis etc.
+2. Tools: These are the functions, APIs, or other databases which are used to execute or fetch information beyond an LLM's (or Agents) external knowledge.
+3. Memory: Memory is the ability of an agent to store, recall and use that information so that the agent can use it for better decision making in the present and future. If memory doesn't exist, every interation with the LLM in an agentic system will be an individual conversation. There are 2 types of memory; short-term and long-term. Short-term memory contains the context of current session which is required only to finish the current task. While long term memory holds the context for much longer period. It generally holds information like generic instructions, user preferences etc which can be useful for many sessions.
+4. Control flow: It is a mechanism which decides, at each step, what happens given the current state and who or what decides that; code or model. It is different from workflow, which is having a control over the execution path. But here, we cannot pre-define the execution order, but can limit the boundary for the system to work.
+5. Human-in-the-loop: It integrates the human intervention into agentic system for human judgement, approval etc. While agentic system can make decisons and execute functions, certain high-stakes decision like data deletion, money payment, sending out emails require human approval.
+6. Multi agents: Systems which involve the collaboration of multiple agents to complete a task or solve a problem. Here the state and memory can be shared between agents in a multi-agent system, but they don't have to be necessarily. It depends on the system architectural design.
