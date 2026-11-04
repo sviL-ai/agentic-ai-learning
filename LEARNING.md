@@ -36,3 +36,22 @@
 4. Control flow: It is a mechanism which decides, at each step, what happens given the current state and who or what decides that; code or model. It is different from workflow, which is having a control over the execution path. But here, we cannot pre-define the execution order, but can limit the boundary for the system to work.
 5. Human-in-the-loop: It integrates the human intervention into agentic system for human judgement, approval etc. While agentic system can make decisons and execute functions, certain high-stakes decision like data deletion, money payment, sending out emails require human approval.
 6. Multi agents: Systems which involve the collaboration of multiple agents to complete a task or solve a problem. Here the state and memory can be shared between agents in a multi-agent system, but they don't have to be necessarily. It depends on the system architectural design.
+
+
+### Date: 04/11/2026
+
+# Agent Middleware
+
+| Middleware | Problem it solves | Usage |
+|---|---|---|
+| **SummarizationMiddleware** | Condenses older conversation history into a semantic summary once message or token counts cross a set limit, while preserving recent messages intact. | Can be used for long running conversations where history is very importatnt. |
+| **HumanInTheLoopMiddleware** | It gets the approval or judgemnt of a human before executing or making a risky decision | Anything irreversible: refunds, sending emails to customers, deleting records etc. |
+| **ModelCallLimitMiddleware** | It limits the model call per run/thread to avoid repeated looping which also saves time and cost. | Can be used in almost all production agents. |
+| **ToolCallLimitMiddleware** | Limits the tool call  which uses an expensive/rate-limited API from being overused. | Paid or rate-limited APIs (web search, geocoding, third-party CRM). |
+| **ModelFallbackMiddleware** | If the primary model has an error or is rate-limited or has an outage, it backs up by other models in order. | Fall back from the main model to a second provider or cheaper model. |
+| **ToolRetryMiddleware** | Tools fail transiently (timeouts, 5xx, flaky networks). Retries with configurable backoff. | Agents calling internal microservices or external APIs that are occasionally flaky. Use only for idempotent tools. |
+| **PIIMiddleware** | It blocks, redacts, mask or hashes sensitive data (emails, card numbers, IPs) that reaches the model, logs, or tools. | Use cases where we are sending user input/information to third party tools or models. |
+| **TodoListMiddleware** | On multi-step tasks the agent loses track of the plan. So this middlware write a todo list, plans and tracks progress. | Long, multi-step jobs (report generation, migrations, multi-system onboarding workflows). |
+| **LLMToolSelectorMiddleware** | Too many tools confuse the model, waste tokens, and cause wrong tool picks. A cheap LLM pre-selects the relevant tools for each query. | Agents with a large tool catalogue (roughly 15+), such as a platform agent wired to many internal systems. |
+| **ContextEditingMiddleware** | Old tool outputs (big search results, DB dumps) bloat the context. It clears stale tool results once a token threshold is crossed. | Tool-heavy agents (research, data lookup, log analysis) where raw outputs are huge and only the latest ones matter. Cheaper than summarizing. |
+| **LLMToolEmulator** | You want to test the agent without real tools (cost, side effects, or tools not built yet). An LLM fakes the tool outputs. | Development and CI: prototyping flows before backend APIs exist, or safely testing agents that would otherwise send or delete things. |
