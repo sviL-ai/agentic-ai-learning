@@ -10,10 +10,17 @@ requires-python = ">=3.12"
 dependencies = [
     "langchain>=1.4.7",
     "langchain-anthropic>=1.7.9",
+    "langchain-chroma>=1.1.0",
+    "langchain-classic>=1.0.8",
+    "langchain-community>=0.4.2",
     "langchain-openai>=1.7.3",
+    "langgraph>=1.2.19",
+    "langgraph-checkpoint-postgres>=3.2.0",
     "langsmith>=0.14.14",
     "openai>=3.41.0",
+    "psycopg[binary,pool]>=3.3.8",
     "python-dotenv>=1.2.4",
+    "uuid-utils==0.14.0",
 ]
 
 [project.scripts]
