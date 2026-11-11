@@ -18,7 +18,7 @@ SYSTEM_PROMPT = (
     "Use what the user told you earlier in the conversation."   
 )
 
-DB_URI = os.environ["DB_URI"]
+DB_URI = os.environ["DB_URI_d1"]
 
 def run(checkpointer):
     agent = create_agent(
