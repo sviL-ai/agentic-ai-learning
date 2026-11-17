@@ -1,0 +1,7 @@
+{
+  "dependencies": ["."],
+  "graphs": {
+    "triage": "./triage/studio.py:graph"
+  },
+  "env": ".env"
+}
