@@ -1,4 +1,6 @@
 .env
 .venv/
-!/l5-rag/chromadb/*
 /d3-langgraph/.langgraph_api/
+chroma_db/
+checkpoints.db*
+outbox.jsonl
