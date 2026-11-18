@@ -32,7 +32,7 @@ uv run python app.py           # chat; add --thread <id> to resume
 ![](docs/rag-agent2.png)
 
 ### 3. Same run, resumed after approval (new terminal)
-![](docs/rag-agent2.png)
+![](docs/rag-agent3.png)
 
 ## Design notes
 
