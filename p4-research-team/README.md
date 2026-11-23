@@ -68,9 +68,9 @@ uv run python trace_run.py <thread_id>
 
 ## The three briefs
 
-- [Company 1](briefs/<company-1>.md)
-- [Company 2](briefs/<company-2>.md)
-- [Company 3](briefs/<company-3>.md)
+- [Company 1](briefs/ileaf-solutions.md)
+- [Company 2](briefs/ibs-software.md)
+- [Company 3](briefs/litmus7.md)
 
 ## Trace of one run
 
