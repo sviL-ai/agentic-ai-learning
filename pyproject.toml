@@ -26,6 +26,7 @@ dependencies = [
     "psycopg[binary,pool]>=3.3.8",
     "python-dotenv>=1.2.4",
     "tavily-python>=0.8.5",
+    "tiktoken==0.9.0",
     "uuid-utils==0.14.0",
 ]
 
