@@ -9,6 +9,7 @@ authors = [
 requires-python = ">=3.12"
 dependencies = [
     "beautifulsoup4>=4.15.0",
+    "exa-py>=2.29.0",
     "langchain>=1.4.7",
     "langchain-anthropic>=1.7.9",
     "langchain-chroma>=1.1.0",
@@ -16,6 +17,7 @@ dependencies = [
     "langchain-community>=0.4.2",
     "langchain-core>=1.7.3",
     "langchain-openai>=1.7.3",
+    "langchain-tavily>=0.2.18",
     "langgraph>=1.2.19",
     "langgraph-checkpoint>=4.3.1",
     "langgraph-checkpoint-postgres>=3.2.0",
