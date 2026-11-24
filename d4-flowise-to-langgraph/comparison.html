@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flowise vs LangGraph: Indian Legal Chatbot</title>
+<style>
+  :root {
+    --bg: #f6f7f9; --card: #ffffff; --text: #1d2330; --muted: #5d6677; --border: #d9dee7;
+    --flowise: #b45309; --langgraph: #1d4ed8; --code-bg: #eef1f6; --box-height: 420px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12151b; --card: #1b2029; --text: #e6e9ef; --muted: #9aa4b5; --border: #2c3442;
+      --flowise: #f59e0b; --langgraph: #60a5fa; --code-bg: #262d3a;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 24px 16px 64px; background: var(--bg); color: var(--text);
+    font: 15px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  .wrap { max-width: 1280px; margin: 0 auto; }
+  h1 { margin: 0 0 4px; font-size: 24px; }
+  .sub { color: var(--muted); margin: 0 0 20px; }
+  .toolbar { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 24px; }
+  .toolbar label { color: var(--muted); font-size: 13px; }
+  .toolbar input[type=range] { vertical-align: middle; }
+  button {
+    font: inherit; font-size: 13px; padding: 4px 10px; border-radius: 6px; cursor: pointer;
+    border: 1px solid var(--border); background: var(--card); color: var(--text);
+  }
+  button:hover { border-color: var(--muted); }
+
+  .q { background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+       padding: 16px; margin-bottom: 28px; }
+  .q h2 { margin: 0 0 4px; font-size: 17px; }
+  .q .tag { font-size: 12px; color: var(--muted); margin-bottom: 12px; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 800px) { .cols { grid-template-columns: 1fr; } }
+
+  .col { min-width: 0; }
+  .col-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .col-head .name { font-weight: 600; font-size: 14px; }
+  .flowise .name { color: var(--flowise); }
+  .langgraph .name { color: var(--langgraph); }
+  .box {
+    height: var(--box-height); overflow-y: auto; resize: vertical;
+    border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px;
+    background: var(--bg); word-wrap: break-word; overflow-wrap: anywhere;
+  }
+  .flowise .box { border-top: 3px solid var(--flowise); }
+  .langgraph .box { border-top: 3px solid var(--langgraph); }
+  .box h1, .box h2, .box h3, .box h4 { font-size: 15px; margin: 14px 0 6px; }
+  .box p { margin: 0 0 10px; }
+  .box ul, .box ol { margin: 0 0 10px; padding-left: 22px; }
+  .box code { background: var(--code-bg); padding: 1px 5px; border-radius: 4px; font-size: 13px; }
+  .box pre { background: var(--code-bg); padding: 10px; border-radius: 6px; overflow-x: auto; }
+  .box pre code { padding: 0; background: none; }
+  .box table { border-collapse: collapse; margin-bottom: 10px; }
+  .box th, .box td { border: 1px solid var(--border); padding: 4px 8px; }
+  .box blockquote { margin: 0 0 10px; padding-left: 12px; border-left: 3px solid var(--border); color: var(--muted); }
+  .box.plain { white-space: pre-wrap; }
+
+  .notes { margin-top: 12px; padding: 10px 12px; border-radius: 8px; background: var(--bg);
+           border: 1px dashed var(--border); font-size: 14px; }
+  .notes b { color: var(--muted); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Flowise vs LangGraph: Indian Legal Chatbot</h1>
+  <p class="sub">Same questions, same prompt. Each answer box scrolls on its own; drag a box's bottom-right corner to resize it.</p>
+
+  <div class="toolbar">
+    <label>Box height
+      <input id="h" type="range" min="200" max="900" step="20" value="420">
+      <span id="hv">420px</span>
+    </label>
+    <button id="scrollTop">Scroll all boxes to top</button>
+  </div>
+
+  <div id="questions"></div>
+</div>
+
+<!-- ======================================================================
+  HOW TO EDIT
+  1. Replace the text inside each <script type="text/markdown"> block with the real answer.
+     (Paste as-is; Markdown is rendered. Backticks and quotes are safe here.)
+  2. To add a question, copy a whole <section class="q-data"> block and paste it below the last one.
+  3. The only thing you must never paste inside a block is the closing script tag.
+====================================================================== -->
+
+<section class="q-data" data-title="Q1. What are the fundamental rights guaranteed to citizens under the Indian Constitution?" data-tag="Conceptual · tests scope handling">
+  <script type="text/markdown" data-side="flowise">
+
+### 📜 Stage 2: Fundamental Rights under the Indian Constitution
+
+Part III of the Constitution of India (Articles 12–35) guarantees fundamental rights that are essential for individual development and are enforceable through courts of law.
+
+| Article | Fundamental Right / Provision | Key Legal Principle |
+|---|---|---|
+| **Article 12** | Definition of the State | Defines the State to include the Union and State Governments, legislatures, local authorities and other authorities. |
+| **Article 13** | Laws inconsistent with Fundamental Rights | Declares laws that violate Fundamental Rights void to the extent of inconsistency. Establishes the principle of judicial review. |
+| **Article 14** | Equality before Law | Guarantees equality before the law and equal protection of laws to all persons. |
+| **Article 15** | Prohibition of Discrimination | Prohibits discrimination based on religion, race, caste, sex or place of birth. Permits special provisions for specified disadvantaged groups. |
+| **Article 16** | Equality in Public Employment | Guarantees equality of opportunity in public employment and permits reservations for backward classes. |
+| **Article 17** | Abolition of Untouchability | Abolishes untouchability and makes its practice punishable by law. |
+| **Article 18** | Abolition of Titles | Abolishes titles except military and academic distinctions. |
+| **Article 19** | Six Fundamental Freedoms | Guarantees freedom of speech, assembly, association, movement, residence and profession, subject to reasonable restrictions. |
+| **Article 20** | Protection in Respect of Conviction for Offences | Protects against ex-post facto criminal laws, double jeopardy and self-incrimination. |
+| **Article 21** | Protection of Life and Personal Liberty | No person shall be deprived of life or personal liberty except according to procedure established by law. |
+| **Article 21A** | Right to Education | Guarantees free and compulsory education for children aged 6–14 years. |
+| **Article 22** | Protection against Arrest and Detention | Provides safeguards relating to arrest, detention, legal representation and production before a magistrate. |
+| **Article 23** | Prohibition of Human Trafficking and Forced Labour | Prohibits human trafficking, begar and other forms of forced labour. |
+| **Article 24** | Prohibition of Child Labour | Prohibits employment of children below 14 years in factories, mines and hazardous employment. |
+| **Article 25** | Freedom of Religion | Guarantees freedom of conscience and the right to profess, practise and propagate religion. |
+| **Article 26** | Freedom to Manage Religious Affairs | Allows religious denominations to establish institutions and manage their religious affairs. |
+| **Article 27** | Freedom from Religious Taxation | Prohibits compulsory taxation specifically used to promote or maintain a particular religion. |
+| **Article 28** | Religious Instruction in Educational Institutions | Regulates religious instruction and worship in educational institutions. |
+| **Article 29** | Protection of Cultural Interests | Protects the language, script and culture of sections of citizens and prohibits specified admission discrimination. |
+| **Article 30** | Minority Educational Rights | Gives religious and linguistic minorities the right to establish and administer educational institutions. |
+| **Article 32** | Constitutional Remedies | Guarantees the right to approach the Supreme Court for enforcement of Fundamental Rights through constitutional remedies. |
+
+---
+
+### ⚖️ Stage 3: Landmark Judgments on Fundamental Rights
+
+| Case | Year / Citation | Key Legal Principle |
+|---|---|---|
+| ***A.K. Gopalan v. State of Madras*** | AIR 1950 SC 27 | Adopted a narrow interpretation of Article 21 and the expression "procedure established by law". |
+| ***Shankari Prasad Deo v. Union of India*** | AIR 1951 SC 458 | Held that Parliament has the power to amend Fundamental Rights under Article 368. |
+| ***Sajjan Singh v. State of Rajasthan*** | AIR 1965 SC 845 | Reaffirmed Parliament's power to amend Fundamental Rights. |
+| ***I.C. Golaknath v. State of Punjab*** | AIR 1967 SC 1643 | Held that Parliament could not amend Fundamental Rights. |
+| ***Kesavananda Bharati v. State of Kerala*** | AIR 1973 SC 1461 | Established the Basic Structure Doctrine. Parliament can amend the Constitution but cannot destroy its basic structure. |
+| ***Maneka Gandhi v. Union of India*** | AIR 1978 SC 597 | Held that the procedure under Article 21 must be fair, just and reasonable. Significantly expanded the interpretation of personal liberty. |
+| ***Minerva Mills Ltd. v. Union of India*** | AIR 1980 SC 1789 | Reaffirmed the Basic Structure Doctrine and emphasised harmony between Fundamental Rights and Directive Principles. |
+| ***S.R. Bommai v. Union of India*** | AIR 1994 SC 1918 | Reaffirmed secularism as a basic feature of the Constitution and addressed misuse of Article 356. |
+| ***Vishaka v. State of Rajasthan*** | AIR 1997 SC 3011 | Established guidelines against workplace sexual harassment, recognising violations of Articles 14, 15 and 21. |
+| ***K.S. Puttaswamy v. Union of India*** | (2017) 10 SCC 1 | Recognised the Right to Privacy as a Fundamental Right under Article 21. |
+
+---
+
+### 🏛️ Stage 4: Enforcement of Fundamental Rights
+
+| Parameter | Article 32 – Supreme Court | Article 226 – High Court |
+|---|---|---|
+| **Judicial Forum** | Supreme Court of India | High Court of the respective State |
+| **Constitutional Provision** | Article 32 | Article 226 |
+| **Purpose** | Enforcement of Fundamental Rights | Enforcement of Fundamental Rights and other legal rights |
+| **Nature of Right** | The right to approach the Supreme Court for enforcement of Fundamental Rights is itself guaranteed as a Fundamental Right. | Constitutional remedy available through the High Courts. |
+| **Scope of Jurisdiction** | Limited to enforcement of Fundamental Rights. | Wider jurisdiction covering Fundamental Rights and other legal rights. |
+| **Types of Writs** | Habeas Corpus, Mandamus, Prohibition, Quo Warranto and Certiorari | Habeas Corpus, Mandamus, Prohibition, Quo Warranto and Certiorari |
+| **Constitutional Significance** | Described by Dr. B.R. Ambedkar as the "heart and soul" of the Constitution. | Provides a wider constitutional remedy for protecting legal and fundamental rights. |
+
+---
+
+### 📋 Key Procedural Steps for Enforcement
+
+| Step | Procedure | Description |
+|---|---|---|
+| **1. Identification of Violation** | Identify the violated right | Determine which specific Fundamental Right has been violated. |
+| **2. Gathering Evidence** | Collect supporting documents | Gather relevant facts, documents and evidence supporting the claim. |
+| **3. Choice of Forum** | Select the appropriate court | Decide whether to approach the High Court under Article 226 or Supreme Court under Article 32. |
+| **4. Drafting of Writ Petition** | Prepare the petition | Include facts, violated rights, legal arguments and specific relief sought. |
+| **5. Filing and Hearing** | Submit the petition | File before the appropriate court, which hears both parties and passes an order. |
+
+---
+
+### ⚖️ Potential Legal Remedies
+
+| Remedy | Purpose |
+|---|---|
+| **Declaration of Unconstitutionality** | Seek a declaration that a law or executive action violating Fundamental Rights is unconstitutional and void. |
+| **Injunction** | Obtain an order preventing the State or an authority from taking an action that violates Fundamental Rights. |
+| **Quashing of Orders** | Seek cancellation of an arbitrary or illegal order infringing Fundamental Rights. |
+| **Compensation** | Seek monetary compensation in appropriate cases involving violations of Fundamental Rights. |
+| **Directions / Guidelines** | Request directions or guidelines to prevent future violations by State authorities. |
+
+---
+
+### 📌 Important Legal Note
+
+- Fundamental Rights are primarily contained in **Part III (Articles 12–35)** of the Constitution.
+- **Article 32** provides a constitutional remedy before the Supreme Court.
+- **Article 226** provides a wider remedy before High Courts, extending beyond Fundamental Rights.
+- The **Basic Structure Doctrine**, established in *Kesavananda Bharati v. State of Kerala (1973)*, limits Parliament's power to amend the Constitution.
+
+---
+
+**Disclaimer:** This output is for research and analysis purposes only and does not constitute formal legal advice. Legal practitioners should independently verify all facts, statutory provisions, citations and arguments before relying on them.
+
+  </script>
+  <script type="text/markdown" data-side="langgraph">
+### 🔍 Stage 1: Factual & Jurisdictional Analysis
+
+* **Jurisdiction:** Republic of India.
+* **Primary Source of Law:** Constitutional Law — Part III of the Constitution of India, 1950 (Articles 12 to 35).
+* **Core Legal Subject:** Fundamental Rights guaranteed to individuals, with a specific focus on rights exclusively conferred upon Indian citizens versus those guaranteed to all persons (citizens and foreign nationals alike).
+* **Factual & Contextual Note:** Part III guarantees six broad categories of fundamental rights. While rights under Articles 14, 20, 21, 21A, 22, 23, 24, 25, 26, 27, and 28 apply to all persons within the territory of India, the rights under **Articles 15, 16, 19, 29, and 30 are guaranteed exclusively to citizens of India**. The query does not specify a factual grievance or state entity action; the following analysis details the constitutional structure and judicial interpretation of these provisions.
+
+---
+
+### 📚 Stage 2: The Legal Corpus & Statutory Insight
+
+Part III of the Constitution of India guarantees six fundamental categories of rights. The 44th Constitutional Amendment Act, 1978, repealed the Right to Property as a Fundamental Right (former Article 31) and reclassified it as a legal/constitutional right under Article 300A.
+
+#### 1. Right to Equality (Articles 14–18)
+* **Article 14:** *Equality before Law and Equal Protection of the Laws* — Guarantees that the State shall not deny any person equality before the law or equal protection of laws within the territory of India (available to citizens and non-citizens).
+* **Article 15:** *Prohibition of Discrimination* — Prohibits discrimination by the State against any **citizen** on grounds only of religion, race, caste, sex, or place of birth (**Citizen-exclusive**).
+* **Article 16:** *Equality of Opportunity in Public Employment* — Ensures equal opportunity for all **citizens** in matters relating to employment or appointment to any office under the State (**Citizen-exclusive**).
+* **Article 17:** *Abolition of Untouchability* — Abolishes "Untouchability" and forbids its practice in any form.
+* **Article 18:** *Abolition of Titles* — Prohibits the State from conferring titles, excluding military and academic distinctions.
+
+#### 2. Right to Freedom (Articles 19–22)
+* **Article 19:** *Protection of Six Fundamental Freedoms* — Guarantees to **citizens** six fundamental freedoms (**Citizen-exclusive**):
+  1. Freedom of speech and expression [Art. 19(1)(a)]
+  2. Freedom to assemble peaceably and without arms [Art. 19(1)(b)]
+  3. Freedom to form associations, unions, or co-operative societies [Art. 19(1)(c)]
+  4. Freedom to move freely throughout the territory of India [Art. 19(1)(d)]
+  5. Freedom to reside and settle in any part of the territory of India [Art. 19(1)(e)]
+  6. Freedom to practice any profession, or to carry on any occupation, trade, or business [Art. 19(1)(g)]
+  *(Subject to reasonable restrictions under Articles 19(2) through 19(6)).*
+* **Article 20:** *Protection in Respect of Conviction for Offences* — Provides protection against ex-post facto criminal laws, double jeopardy, and self-incrimination.
+* **Article 21:** *Protection of Life and Personal Liberty* — Mandates that no person shall be deprived of their life or personal liberty except according to procedure established by law.
+* **Article 21A:** *Right to Education* — Mandates the State to provide free and compulsory education to all children aged 6 to 14 years.
+* **Article 22:** *Protection against Arrest and Detention* — Provides safeguards against arbitrary arrest and preventive detention.
+
+#### 3. Right against Exploitation (Articles 23–24)
+* **Article 23:** *Prohibition of Traffic in Human Beings and Forced Labour* — Prohibits human trafficking, *begar*, and other similar forms of forced labor.
+* **Article 24:** *Prohibition of Child Labour* — Forbids the employment of children below the age of 14 in factories, mines, or other hazardous occupations.
+
+#### 4. Right to Freedom of Religion (Articles 25–28)
+* **Article 25:** Freedom of conscience and free profession, practice, and propagation of religion.
+* **Article 26:** Freedom to manage religious affairs.
+* **Article 27:** Freedom as to payment of taxes for promotion of any particular religion.
+* **Article 28:** Freedom as to attendance at religious instruction or religious worship in certain educational institutions.
+
+#### 5. Cultural and Educational Rights (Articles 29–30)
+* **Article 29:** *Protection of Interests of Minorities* — Guarantees any section of **citizens** having a distinct language, script, or culture the right to conserve the same (**Citizen-exclusive**).
+* **Article 30:** *Right of Minorities to Establish and Administer Educational Institutions* — Grants religious and linguistic minorities the right to establish and administer educational institutions of their choice (**Citizen-exclusive**).
+
+#### 6. Right to Constitutional Remedies (Article 32)
+* **Article 32:** Direct right to move the Supreme Court of India by appropriate proceedings for the enforcement of Fundamental Rights. Dr. B.R. Ambedkar described Article 32 as the "very soul of the Constitution and the very heart of it."
+
+---
+
+### 🏛️ Stage 3: The Case Law & Precedent Analysis
+
+Judicial interpretation by the Supreme Court of India has dynamically expanded the scope of Part III:
+
+1. ***Kesavananda Bharati v. State of Kerala*, (1973) 4 SCC 225**
+   * **Ratio Decidendi:** The Supreme Court established the "Basic Structure Doctrine." While Parliament has wide amending powers under Article 368, it cannot alter, damage, or destroy the basic structure of the Constitution, of which Fundamental Rights (and the balance between Part III and Part IV) form a core component.
+
+2. ***Maneka Gandhi v. Union of India*, (1978) 1 SCC 248**
+   * **Ratio Decidendi:** The Court established the doctrine of the "Golden Triangle" comprising Articles 14, 19, and 21. It held that law depriving a person of personal liberty under Article 21 must not merely satisfy formal statutory requirements, but must pass the tests of reasonableness, fairness, and non-arbitrariness under Articles 14 and 19.
+
+3. ***Justice K.S. Puttaswamy (Retd.) v. Union of India*, (2017) 10 SCC 1**
+   * **Ratio Decidendi:** A 9-judge Bench unanimously affirmed that the **Right to Privacy** is an intrinsic part of the Right to Life and Personal Liberty guaranteed under Article 21. The Court laid down a 4-pronged Test of Proportionality (Legality, Legitimate State Aim, Rational Nexus, and Proportionality/Narrowest Means) to assess state intrusions.
+
+4. ***Minerva Mills Ltd. v. Union of India*, (1980) 3 SCC 625**
+   * **Ratio Decidendi:** The Supreme Court affirmed that the harmony and balance between Fundamental Rights (Part III) and Directive Principles of State Policy (Part IV) is an essential feature of the Basic Structure of the Constitution.
+
+---
+
+### 📊 Stage 4: The Legal Strategy & Procedural Roadmap
+
+When evaluating or pursuing a claim involving the infringement of Fundamental Rights, the following procedural and substantive roadmap applies:
+
+#### Procedural Remedies
+1. **Article 226 (High Courts):** 
+   * A aggrieved party may file a Writ Petition before the jurisdictional High Court. The High Court's jurisdiction under Article 226 is broader than Article 32, as it extends to the enforcement of Fundamental Rights *as well as* statutory/legal rights.
+2. **Article 32 (Supreme Court):** 
+   * Direct approach to the Apex Court for violations of Fundamental Rights. The Court may issue prerogative writs:
+     * **Habeas Corpus:** To produce a person unlawfully detained.
+     * **Mandamus:** To command a public authority to perform a mandatory statutory/public duty.
+     * **Certiorari:** To quash quasi-judicial or judicial orders passed without jurisdiction or in violation of natural justice.
+     * **Prohibition:** To restrain lower courts/tribunals from exceeding jurisdiction.
+     * **Quo Warranto:** To challenge an illegal occupant of a public office.
+
+#### Key Substantive Arguments & Analytical Frameworks
+* **Establishing "State" under Article 12:** Determine whether the respondent body falls within the definition of "State" (Government, Parliament, State Legislatures, local authorities, or instrumentalities of the State under the *Ramana Dayaram Shetty* test).
+* **Golden Triangle Test:** Test executive or legislative action simultaneously across Articles 14, 19, and 21 to challenge arbitrariness, unreasonableness, or procedural unfairness.
+* **Reasonable Restrictions Analysis (Article 19):** If challenging restrictions under Article 19, verify if the State restriction falls strictly under the enumerated grounds in Articles 19(2)–19(6) and satisfies the doctrine of proportionality.
+
+---
+
+### 📝 Stage 5: The Generative Document Task
+
+To draft a formal Writ Petition under Article 32 or Article 226 of the Constitution of India for the enforcement of fundamental rights, the following specific details are required from the petitioner:
+
+1. **Party Details:** Full name, age, occupation, address, and nationality of the Petitioner (to confirm citizenship status for Articles 15, 16, 19, 29, 30 claims).
+2. **Respondent Details:** State authority/instrumentality against whom relief is sought (satisfying Article 12).
+3. **Impugned Action/Order:** Copy and date of the administrative order, statutory notification, or action violating fundamental rights.
+4. **Statement of Facts:** Chronological events leading to the breach.
+5. **Specific Rights Contended:** Exact Articles of Part III alleged to be violated (e.g., Article 14, Article 19(1)(g), Article 21).
+6. **Relief Sought:** The precise writ (e.g., Mandamus, Certiorari) or directions requested.
+
+---
+
+This output is for research and analysis purposes only and does not constitute formal legal advice. It is the responsibility of the legal practitioner to verify all facts, citations, and arguments before use.
+  </script>
+</section>
+
+<section class="q-data" data-title="Q2. What is the difference between civil law and criminal law?" data-tag="Statute lookup · tests IPC to BNS mapping">
+  <script type="text/markdown" data-side="flowise">
+
+### ⚖️ Stage 1: The Factual & Jurisdictional Analysis
+
+This query falls under **General Indian Legal Principles**, specifically concerning the fundamental distinction between Civil Law and Criminal Law.
+
+The core legal question is to differentiate between civil law and criminal law in the Indian context. This distinction is fundamental to understanding the Indian legal system.
+
+---
+
+### 📚 Stage 2: The Legal Corpus & Statutory Insight
+
+While there isn't a single statute that explicitly defines the difference between civil and criminal law, their distinct natures are reflected in the separate comprehensive codes and statutes governing each.
+
+#### **1. Civil Law**
+
+Civil Law deals with disputes between individuals or organizations, where the objective is to provide a remedy for a private wrong.
+
+**Key Statutes:**
+
+| Statute | Year | Purpose / Scope |
+|---|---|---|
+| **Code of Civil Procedure (CPC)** | 1908 | Lays down the procedure for civil litigation, including institution of suits, appearance of parties, examination of witnesses, judgments and decrees. |
+| **Indian Contract Act** | 1872 | Governs agreements and contracts, including their formation, performance and breach. |
+| **Specific Relief Act** | 1963 | Deals with specific remedies for civil wrongs, such as specific performance of contracts, injunctions and declarations. |
+| **Transfer of Property Act** | 1882 | Governs the transfer of property between living persons. |
+| **Hindu Marriage Act / Special Marriage Act / Muslim Personal Law** | 1955 / 1954 / As applicable | Pertain to matrimonial disputes, divorce, maintenance and child custody. |
+| **Consumer Protection Act** | 2019 | Provides for the protection of consumers' interests and redressal of consumer grievances. |
+
+#### **2. Criminal Law**
+
+Criminal Law deals with acts considered offences against the State or society as a whole, with the objective of punishing the offender and deterring crime.
+
+**Key Statutes:**
+
+| Statute | Year | Purpose / Scope |
+|---|---|---|
+| **Indian Penal Code (IPC)** | 1860 | Defines criminal offences such as murder, theft, assault and fraud, and prescribes punishments. |
+| **Code of Criminal Procedure (CrPC)** | 1973 | Lays down procedures for investigation, arrest, trial, bail and sentencing. |
+| **Indian Evidence Act** | 1872 | Governs admissibility and weight of evidence in civil and criminal proceedings. |
+| **Prevention of Corruption Act** | 1988 | Deals with offences related to corruption by public servants. |
+| **Narcotic Drugs and Psychotropic Substances Act (NDPS Act)** | 1985 | Deals with offences involving illicit drugs. |
+
+---
+
+### ⚖️ Stage 3: The Case Law & Precedent Analysis
+
+The judiciary consistently applies distinct principles and procedures based on whether a matter is civil or criminal. While no single case directly defines the difference, several judgments illustrate the application of these distinct frameworks.
+
+#### **1. Impact of Burden of Proof**
+
+- **Criminal Cases:** The principle of presumption of innocence is paramount. The prosecution must prove guilt **beyond a reasonable doubt**.
+  - *Case:* **State of Rajasthan v. Shera Ram**, (2012) 1 SCC 602.
+  - **Principle:** Mere suspicion, however strong, cannot be the basis of conviction.
+
+- **Civil Cases:** The standard of proof is **preponderance of probabilities**, meaning the party asserting a claim must establish that their version of facts is more probable than not.
+
+#### **2. Nature of Remedies**
+
+- **Criminal Cases:** Focus on punitive measures such as imprisonment and fines for offences against society.
+  - *Case:* **Ramesh Kumar v. State of Bihar**, (1987) 2 SCC 559.
+  - **Principle:** Illustrates the criminal justice system's focus on punishment for offences.
+
+- **Civil Cases:** Focus on compensatory remedies such as damages or specific performance to restore the injured party to their original position.
+  - *Case:* **S.K. Jain v. Union of India**, AIR 1990 SC 1718.
+  - **Principle:** Illustrates the use of compensatory remedies in civil disputes.
+
+#### **3. Jurisdictional Clarity**
+
+Courts ensure that the correct procedural code (CPC or CrPC) is applied and that the appropriate court exercises jurisdiction based on the nature of the dispute.
+
+**Example – Defamation:**
+
+A complaint of defamation can give rise to both civil and criminal proceedings:
+
+- **Civil Liability:** The affected person may seek damages for the harm caused to their reputation.
+- **Criminal Liability:** The accused may face prosecution under Sections 499 and 500 of the Indian Penal Code (IPC).
+
+The proceedings for each are legally distinct.
+
+---
+
+### 📊 Stage 4: Comparative Summary
+
+| Parameter | Civil Law | Criminal Law |
+|---|---|---|
+| **Purpose** | To resolve disputes, compensate for harm, or enforce rights. | To punish offenders, deter crime, and maintain social order. |
+| **Nature of Wrong** | Private wrong against an individual or entity. | Public wrong against the State or society. |
+| **Parties** | Plaintiff vs. Defendant | State (Prosecution) vs. Accused |
+| **Initiation** | By the aggrieved party through filing a suit or petition. | Through police investigation, FIR or criminal complaint. |
+| **Burden of Proof** | Preponderance of probabilities (lower standard). | Beyond a reasonable doubt (higher standard). |
+| **Remedy / Outcome** | Damages, injunctions, specific performance, declarations and restitution. | Imprisonment, fines, death penalty or probation, as applicable. |
+| **Procedure** | Governed by the Code of Civil Procedure, 1908. | Governed by the Code of Criminal Procedure, 1973. |
+| **Court Type** | Civil Courts, Family Courts, Consumer Forums and Tribunals. | Criminal Courts (Magistrate, Sessions Court, High Court and Supreme Court). |
+| **Punishment** | No punishment in the punitive sense; focus is on making the wronged party whole. | Imposes penalties for offences. |
+
+---
+
+### 🏛️ Stage 5: Procedural Roadmap
+
+Understanding the distinction is critical for a practitioner in determining the appropriate legal action and forum.
+
+#### **1. Civil Matters – Procedural Steps**
+
+| Step | Procedure | Description |
+|---|---|---|
+| **1** | Issue of Legal Notice | Often, a legal notice is sent before filing a suit. |
+| **2** | Filing of Plaint | The aggrieved party (Plaintiff) files a plaint in the appropriate civil court. |
+| **3** | Summons to Defendant | The court issues summons to the opposite party (Defendant). |
+| **4** | Written Statement | The Defendant files a written statement in response. |
+| **5** | Framing of Issues | The court frames issues for determination. |
+| **6** | Evidence | Parties present oral and documentary evidence. |
+| **7** | Arguments | Final arguments are heard. |
+| **8** | Judgment and Decree | The court pronounces judgment and passes a decree. |
+| **9** | Execution | The decree can be executed if the defendant does not comply voluntarily. |
+
+#### **2. Criminal Matters – Procedural Steps**
+
+| Step | Procedure | Description |
+|---|---|---|
+| **1** | Filing of FIR / Complaint | An FIR is filed with the police (Section 154, CrPC), or a private complaint is filed before a Magistrate (Section 200, CrPC). |
+| **2** | Investigation | Police investigate the offence, collect evidence and record statements. |
+| **3** | Arrest | The accused may be arrested in accordance with applicable provisions (Sections 41–60A, CrPC). |
+| **4** | Charge-sheet / Final Report | Police file a charge-sheet if sufficient evidence is found (Section 173, CrPC), or submit a closure report. |
+| **5** | Cognizance and Summoning | The Magistrate takes cognizance and issues summons or warrants to the accused, as applicable. |
+| **6** | Framing of Charges | Charges are framed against the accused where required. |
+| **7** | Trial | Prosecution presents evidence and witnesses are examined through examination-in-chief, cross-examination and re-examination. |
+| **8** | Statement of Accused | The accused's statement is recorded under Section 313, CrPC. |
+| **9** | Defence Evidence | The accused may present defence evidence. |
+| **10** | Arguments | Final arguments are heard. |
+| **11** | Judgment | The court pronounces its judgment, resulting in acquittal or conviction. |
+| **12** | Sentencing | If convicted, arguments on the quantum of sentence are heard and the sentence is awarded. |
+
+---
+
+### ⚖️ Stage 6: Potential Legal Arguments & Remedies
+
+The remedies available depend on the nature of the case and the applicable legal provisions.
+
+#### **1. Civil Remedies**
+
+- **Specific Performance:** Seeking enforcement of contractual obligations.
+- **Recovery of Money:** Seeking recovery of outstanding amounts or debts.
+- **Declaration of Title:** Establishing legal ownership of property.
+- **Injunctions:** Preventing certain actions through court orders.
+- **Matrimonial Relief:** Seeking divorce, maintenance or other matrimonial remedies.
+- **Compensation for Damages:** Seeking compensation for tortious acts or breach of contract.
+
+#### **2. Criminal Remedies**
+
+- **Conviction and Punishment:** Seeking conviction and punishment for offences under applicable criminal laws.
+- **Regular Bail:** Seeking release from custody during criminal proceedings.
+- **Anticipatory Bail:** Seeking protection against arrest in appropriate cases.
+- **Quashing of FIR / Criminal Proceedings:** Seeking quashing under Section 482, CrPC.
+- **Appeal:** Challenging a conviction or acquittal before the appropriate appellate court.
+
+---
+
+### 📌 Important Cross-Over Note
+
+It is legally significant that a single course of conduct may simultaneously give rise to **both civil and criminal liability**.
+
+For example, defamation may result in:
+
+- A **civil proceeding** seeking damages for harm caused to reputation; and
+- A **criminal proceeding** seeking punishment under the applicable criminal law.
+
+Although both proceedings may arise from the same facts, they serve different legal purposes and follow separate procedural frameworks.
+
+---
+
+**Disclaimer:** This output is for research and analysis purposes only and does not constitute formal legal advice. It is the responsibility of the legal practitioner to verify all facts, statutory provisions, citations and arguments before use.
+  </script>
+  <script type="text/markdown" data-side="langgraph">
+### 🔍 Stage 1: Factual & Jurisdictional Analysis
+
+* **Jurisdiction:** Republic of India.
+* **Primary Source of Law:** Substantive law codified under the Indian Penal Code, 1860 / Bharatiya Nyaya Sanhita, 2023; procedural frameworks under the Code of Civil Procedure, 1908 and the Code of Criminal Procedure, 1973 / Bharatiya Nagarik Suraksha Sanhita, 2023.
+* **Core Legal Subject:** A foundational distinction between two independent branches of jurisprudence — Civil Law and Criminal Law — as administered under the Indian legal system.
+
+---
+
+### 📚 Stage 2: Legal Corpus & Statutory Framework
+
+#### A. Civil Law (Private Law)
+
+Civil law governs disputes between individuals, organizations, or between the two, involving private rights, duties, and obligations.
+
+| Aspect | Provision / Framework |
+|---|---|
+| **Nature** | Remedial and compensatory; redresses private wrongs |
+| **Procedure** | Code of Civil Procedure, 1908 (CPC) |
+| **Initiation** | Plaint filed by the aggrieved party (Plaintiff) against the opposite party (Defendant) |
+| **Substantive Laws** | Indian Contract Act, 1872; Transfer of Property Act, 1882; Hindu Succession Act, 1956; Specific Relief Act, 1963; Family laws (Hindu Marriage Act, Muslim Personal Law, etc.); Consumer Protection Act, 2019; Tort principles |
+| **Burden of Proof** | Preponderance of probability (*Balanced scale of justice*) — Section 101–104, Indian Evidence Act, 1872 |
+| **Standard of Proof** | Lower threshold than criminal law; not required to exclude every reasonable doubt |
+| **Remedies** | Compensation/damages, specific performance, injunctions, declaration, restitution |
+| **Contempt / Liability** | Monetary or equitable relief; no imposition of imprisonment as punishment |
+| **Right to Appeal** | First appeal under Order XLI CPC; Second appeal under Section 100 CPC |
+| **Locus Standi** | Party directly affected (the aggrieved person initiates the suit) |
+
+#### B. Criminal Law (Public Law)
+
+Criminal law governs acts committed against society, the State, or individuals that are deemed offenses cognizable under statute. The State prosecutes the offender on behalf of society.
+
+| Aspect | Provision / Framework |
+|---|---|
+| **Nature** | Punitive and deterrent; addresses public wrongs and social harm |
+| **Procedure** | Code of Criminal Procedure, 1973 (CrPC) → being transitioned to Bharatiya Nagarik Suraksha Sanhita, 2023 (BNSS) |
+| **Substantive Offenses** | Indian Penal Code, 1860 (IPC) → being replaced by Bharatiya Nyaya Sanhita, 2023 (BNS); Special statutes (POCSO Act, NDPS Act, IT Act, etc.) |
+| **Initiation** | Complaint/FIR lodged before police or Magistrate; prosecution launched in the name of the State (e.g., *State v. Accused*) |
+| **Burden of Proof** | On the Prosecution throughout; Section 101, Indian Evidence Act, 1872 |
+| **Standard of Proof** | Beyond reasonable doubt — a much higher threshold demanding near-certainty (*Kathiyawari Saving Society Ltd. v. State of Gujarat*, AIR 1953 SC 306) |
+| **Remedies / Punishments** | Imprisonment, fine, capital punishment, probation, community service ( Sections 53–75, IPC / BNS) |
+| **Presumption of Innocence** | Accused is presumed innocent until proved guilty (*Woolmington v. DPP*, applied in Indian jurisprudence — *State of Haryana v. Bhajan Lal*, 1992 Supp(1) SCC 335) |
+| **Double Jeopardy Protection** | Article 20(2), Constitution of India; Section 300, CrPC |
+| **Locus Standi** | State acts as prosecutor; victim may file private complaint under Section 200, CrPC where provision permits |
+
+---
+
+### 🏛️ Stage 3: The Case Law & Precedent Analysis
+
+1. ***Gour Hari Dhasana v. State of Delhi*, AIR 1958 SC 378**
+   * The Supreme Court affirmed the distinction between civil wrongs (liability arising from breach of duty owed to individuals) and criminal offenses (breach of duty owed to society), emphasizing that criminal liability requires a higher degree of culpability.
+
+2. ***Sukhdev Singh v. Bhagirat*, AIR 1985 SC 1035**
+   * The Court elaborated on the principle that a civil wrong gives rise only to liability in damages, whereas a criminal offense attracts penal consequences, reinforcing the qualitative distinction between the two branches of law.
+
+3. ***Hussainara Khatoon v. Home Secretary, State of Bihar*, (1979) 1 SCC 98**
+   * Demonstrates the remedial divergence — in criminal proceedings, the court was primarily concerned with protecting personal liberty under Article 21 and ensuring fair trial safeguards, contrasting with the purely compensatory nature of civil suits.
+
+4. ***Sheoo Mian v. Emperor*, AIR 1932 PC 206**
+   * The Privy Council clarified that the standard of proof in criminal cases ("beyond reasonable doubt") is qualitatively different from civil proceedings, a distinction retained in modern Indian jurisprudence.
+
+---
+
+### 📊 Stage 4: Comparative Summary
+
+| Parameter | Civil Law | Criminal Law |
+|---|---|---|
+| **Parties** | Plaintiff vs. Defendant | State vs. Accused |
+| **Purpose** | Compensate the injured party | Punish and deter offenders |
+| **Initiating Document** | Plaint (Order VII, CPC) | FIR / Complaint |
+| **Burden of Proof** | Plaintiff — preponderance of probability | Prosecution — beyond reasonable doubt |
+| **Outcome** | Decree / Judgment for damages or injunction | Conviction, acquittal, or sentence |
+| **Right to Counsel** | Either party may engage an advocate | Accused has right to free legal aid (Article 22A, CrPC / Section 312, BNSS) |
+| **Compromise/Settlement** | Generally permissible (Section 89, CPC; Arbitration Act) | Mostly non-compoundable; compoundable offences limited (Section 320, CrPC / Section 358, BNSS) |
+| **Limitation Period** | Governed by Limitation Act, 1963 (varies by suit type) | No limitation period for institution of prosecution (subject to provisions on quashing) |
+| **Judicial Forum** | Civil Judge / District Judge / High Court / Supreme Court | Magistrate Court / Sessions Court / High Court / Supreme Court |
+
+---
+
+### ⚖️ Important Cross-Over Note
+
+It is legally significant to note that a single course of conduct may simultaneously give rise to **both** civil and criminal liability. For example, a person causing hurt to another may face:
+* A **criminal prosecution** for assault (Section 323, IPC / corresponding BNS section); and
+* A **civil suit** for tortious damages (compensation for medical expenses, pain and suffering).
+
+The doctrine of *res judicata* does not operate across these spheres — a final judgment in a civil suit does not bar a subsequent criminal proceeding, and vice versa (*Mackinnon Mackenzie v. Arab Bank*, (1995) 1 SCC 592).
+
+---
+
+This output is for research and analysis purposes only and does not constitute formal legal advice. It is the responsibility of the legal practitioner to verify all facts, citations, and arguments before use.
+  </script>
+  <script type="text/markdown" data-side="notes">
+  </script>
+</section>
+
+<section class="q-data" data-title="Q3. Who is the Prime Minister of Canada?" data-tag="Out-of-scope · tests the Lexi refusal">
+  <script type="text/markdown" data-side="flowise">
+I am Lexi, a legal research assistant for Indian practitioners. Please provide a specific legal query or research task, and I will assist accordingly.
+  </script>
+  <script type="text/markdown" data-side="langgraph">
+I am Lexi, a legal research assistant for Indian practitioners. Please provide a specific legal query or research task, and I will assist accordingly.
+  </script>
+  <script type="text/markdown" data-side="notes">
+  </script>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+<script>
+(function () {
+  const root = document.getElementById('questions');
+  const hasMarked = typeof window.marked !== 'undefined';
+
+  function render(el, text) {
+    text = text.replace(/^\n+|\s+$/g, '');
+    if (hasMarked) { el.innerHTML = marked.parse(text); }
+    else { el.classList.add('plain'); el.textContent = text; }
+  }
+
+  function column(cls, label, text) {
+    const col = document.createElement('div');
+    col.className = 'col ' + cls;
+    const head = document.createElement('div');
+    head.className = 'col-head';
+    head.innerHTML = '<span class="name"></span>';
+    head.firstChild.textContent = label;
+    const box = document.createElement('div');
+    box.className = 'box';
+    render(box, text);
+    col.append(head, box);
+    return col;
+  }
+
+  document.querySelectorAll('section.q-data').forEach(function (sec) {
+    const get = function (side) {
+      const s = sec.querySelector('script[data-side="' + side + '"]');
+      return s ? s.textContent : '';
+    };
+    const card = document.createElement('div');
+    card.className = 'q';
+    const h = document.createElement('h2'); h.textContent = sec.dataset.title || '';
+    const tag = document.createElement('div'); tag.className = 'tag'; tag.textContent = sec.dataset.tag || '';
+    const cols = document.createElement('div'); cols.className = 'cols';
+    cols.append(
+      column('flowise', 'Flowise (Gemini 2.5 Flash, Exa + Web Browser)', get('flowise')),
+      column('langgraph', 'LangGraph (gateway model, Exa)', get('langgraph'))
+    );
+    card.append(h, tag, cols);
+    const notes = get('notes').trim();
+    if (notes) {
+      const n = document.createElement('div'); n.className = 'notes';
+      n.innerHTML = '<b>Notes:</b> <span></span>';
+      n.lastChild.textContent = notes;
+      card.append(n);
+    }
+    root.append(card);
+    sec.remove();
+  });
+
+  const slider = document.getElementById('h'), label = document.getElementById('hv');
+  slider.addEventListener('input', function () {
+    document.documentElement.style.setProperty('--box-height', slider.value + 'px');
+    label.textContent = slider.value + 'px';
+  });
+  document.getElementById('scrollTop').addEventListener('click', function () {
+    document.querySelectorAll('.box').forEach(function (b) { b.scrollTop = 0; });
+  });
+})();
+</script>
+</body>
+</html>
