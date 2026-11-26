@@ -3,5 +3,6 @@
 __pycache__/
 /d3-langgraph/.langgraph_api/
 chroma_db/
+.crewai
 checkpoints.db*
 outbox.jsonl
