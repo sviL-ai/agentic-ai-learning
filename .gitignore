@@ -6,3 +6,4 @@ chroma_db/
 .crewai
 checkpoints.db*
 outbox.jsonl
+/p5-crewai-team/results/
